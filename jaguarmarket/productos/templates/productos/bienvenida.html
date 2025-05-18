@@ -1,0 +1,12 @@
+{% extends "productos/base.html" %}
+{% block title %}Bienvenido a JaguarMarket{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4 fw-bold">¡Bienvenido a <span style="color: #004225;">JaguarMarket</span>!</h1>
+    <p class="mb-4 fs-5">Una plataforma para que los alumnos publiquen, compren y vendan productos dentro de la universidad.</p>
+
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg mb-3 me-2">Iniciar sesión</a>
+    <a href="{% url 'registro' %}" class="btn btn-outline-success btn-lg mb-3">Registrarse</a>
+</div>
+{% endblock %}

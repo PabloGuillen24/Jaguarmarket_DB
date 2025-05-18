@@ -1,0 +1,22 @@
+{% extends 'productos/base.html' %}
+{% block title %}Editar producto{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2>Editar producto</h2>
+    {% if producto and producto.imagen %}
+    <div class="mb-3 text-center">
+        <p>Imagen actual:</p>
+        <img src="{{ producto.imagen.url }}" alt="Imagen del producto" style="max-height: 200px; border-radius: 10px;">
+    </div>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a href="{% url 'mis_productos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

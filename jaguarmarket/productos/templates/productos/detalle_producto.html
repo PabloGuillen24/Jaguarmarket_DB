@@ -1,0 +1,50 @@
+{% extends 'productos/base.html' %}
+{% block title %}{{ producto.nombre }} | JaguarMarket{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row g-4">
+    <!-- Imagen -->
+    <div class="col-md-6 text-center">
+      {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" class="img-fluid rounded" alt="{{ producto.nombre }}">
+      {% endif %}
+    </div>
+
+    <!-- Datos del producto -->
+    <div class="col-md-6">
+      <h2 class="fw-bold">{{ producto.nombre }}</h2>
+      <p class="text-muted">Categoría: {{ producto.categoria.nombre }}</p>
+      <p>{{ producto.descripcion }}</p>
+      <p class="h4 text-success">${{ producto.precio }}</p>
+      <hr>
+
+      <!-- Datos del vendedor -->
+      <h5>Vendido por:</h5>
+      <ul class="list-unstyled">
+        <li><strong>Usuario:</strong> {{ vendedor.username }}</li>
+        <li><strong>Email:</strong> {{ vendedor.email }}</li>
+        {% if perfil %}
+          <li><strong>Teléfono:</strong> {{ perfil.telefono }}</li>
+          <li><strong>Carrera:</strong> {{ perfil.carrera }}</li>
+        {% endif %}
+      </ul>
+
+      <!-- Botones de contacto -->
+      <div class="d-grid gap-2 mt-3">
+        <a href="mailto:{{ vendedor.email }}" class="btn btn-outline-success">
+          ✉️ Contactar por email
+        </a>
+        {% if perfil and perfil.telefono %}
+          <a href="https://wa.me/{{ perfil.telefono }}" target="_blank" class="btn btn-outline-success">
+            📱 Contactar por WhatsApp
+          </a>
+        {% endif %}
+        <a href="{% url 'mensajes_producto' producto.id %}" class="btn btn-primary">
+          💬 Mensajes sobre este producto
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

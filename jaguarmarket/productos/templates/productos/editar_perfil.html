@@ -1,0 +1,30 @@
+{% extends 'productos/base.html' %}
+{% block title %}Editar perfil{% endblock %}
+
+{% block content %}
+<div class="container py-4" style="max-width:600px;">
+  <h2 class="mb-4">Editar perfil</h2>
+
+  <!-- Formulario teléfono + foto -->
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h5>Datos personales</h5>
+    {{ pform.as_p }}
+    {% if pform.instance.foto %}
+      <p>Foto actual:</p>
+      <img src="{{ pform.instance.foto.url }}" alt="Foto perfil" style="max-height:150px; border-radius:50%;">
+    {% endif %}
+    <button name="perfil_submit" class="btn btn-success mt-2">Guardar datos</button>
+  </form>
+
+  <hr class="my-4">
+
+  <!-- Formulario cambio de contraseña -->
+  <form method="post">
+    {% csrf_token %}
+    <h5>Cambiar contraseña</h5>
+    {{ pass_form.as_p }}
+    <button name="password_submit" class="btn btn-warning mt-2">Actualizar contraseña</button>
+  </form>
+</div>
+{% endblock %}

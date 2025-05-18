@@ -1,0 +1,24 @@
+{% extends 'productos/base.html' %}
+{% block title %}Mis chats - JaguarMarket{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-4">Mis conversaciones</h2>
+  {% if conversaciones %}
+  <ul class="list-group">
+    {% for c in conversaciones %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <a href="{% url 'mensajes_producto' c.producto.id %}">
+        {{ c.producto.nombre }}
+      </a>
+      {% if c.pendientes %}
+      <span class="badge bg-danger rounded-pill">{{ c.pendientes }}</span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="text-muted">No tienes conversaciones iniciadas.</p>
+  {% endif %}
+</div>
+{% endblock %}

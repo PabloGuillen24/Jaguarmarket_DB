@@ -1,0 +1,17 @@
+{% extends "productos/base.html" %}
+{% block title %}Publicar producto - JaguarMarket{% endblock %}
+
+{% block content %}
+<div class="card shadow mx-auto" style="max-width: 700px;">
+    <div class="card-body">
+        <h2 class="mb-4 text-center">Publicar nuevo producto</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Publicar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

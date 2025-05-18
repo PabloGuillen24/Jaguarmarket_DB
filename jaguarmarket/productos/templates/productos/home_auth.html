@@ -1,0 +1,15 @@
+{% extends "productos/base.html" %}
+{% block title %}Inicio | JaguarMarket{% endblock %}
+
+{% block content %}
+<div class="container text-center py-5" style="max-width:600px;">
+  <h1 class="mb-4">¡Bienvenido de nuevo, {{ usuario.username }}!</h1>
+  <p class="lead">¿Qué te gustaría hacer hoy?</p>
+  <div class="d-grid gap-2">
+    <a href="{% url 'explorar_productos' %}" class="btn btn-success btn-lg">Explorar Productos</a>
+    <a href="{% url 'mis_productos' %}" class="btn btn-primary btn-lg">Mis Productos</a>
+    <a href="{% url 'publicar_producto' %}" class="btn btn-warning btn-lg">Publicar un Producto</a>
+    <a href="{% url 'perfil_usuario' %}" class="btn btn-outline-secondary btn-lg">Mi Perfil</a>
+  </div>
+</div>
+{% endblock %}

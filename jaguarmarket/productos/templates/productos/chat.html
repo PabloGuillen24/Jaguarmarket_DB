@@ -1,0 +1,31 @@
+{% extends 'productos/base.html' %}
+{% block title %}Chat sobre "{{ producto.nombre }}"{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-4">Chat sobre “{{ producto.nombre }}”</h2>
+
+  <div class="border rounded p-3 mb-4" style="height: 400px; overflow-y: scroll; background: #f9f9f9;">
+    {% if mensajes %}
+      {% for msg in mensajes %}
+        <div class="mb-2 {% if msg.emisor == request.user %}text-end{% endif %}">
+          <small class="text-muted">{{ msg.emisor.username }} • {{ msg.timestamp|date:"H:i" }}</small><br>
+          <span class="badge {% if msg.emisor == request.user %}bg-primary{% else %}bg-secondary{% endif %}">
+            {{ msg.contenido }}
+          </span>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-muted">No hay mensajes sobre este producto aún.</p>
+    {% endif %}
+  </div>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="input-group">
+      <input type="text" name="mensaje" class="form-control" placeholder="Escribe tu mensaje..." autocomplete="off">
+      <button class="btn btn-warning text-white">Enviar</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

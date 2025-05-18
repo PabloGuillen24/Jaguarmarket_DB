@@ -1,0 +1,54 @@
+{% extends 'productos/base.html' %}
+{% block title %}Mi perfil{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card shadow-sm mx-auto" style="max-width: 800px;">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">Perfil de {{ usuario.username }}</h2>
+
+      <div class="row align-items-center">
+        <!-- Columna de foto -->
+        <div class="col-md-4 text-center mb-4 mb-md-0">
+          {% if perfil.foto %}
+            <img src="{{ perfil.foto.url }}"
+                 alt="Foto de {{ usuario.username }}"
+                 class="rounded-circle img-fluid"
+                 style="width: 180px; height: 180px; object-fit: cover;">
+          {% else %}
+            <div class="bg-secondary rounded-circle d-inline-block" 
+                 style="width: 180px; height: 180px;"></div>
+          {% endif %}
+        </div>
+
+        <!-- Columna de datos -->
+        <div class="col-md-8">
+          <ul class="list-unstyled mb-4">
+            <li class="mb-3">
+              <strong>Usuario:</strong> {{ usuario.username }}
+            </li>
+            <li class="mb-3">
+              <strong>Email:</strong> {{ usuario.email }}
+            </li>
+            <li class="mb-3">
+              <strong>Teléfono:</strong> {{ perfil.telefono|default:"—" }}
+            </li>
+            <li class="mb-0">
+              <strong>Carrera:</strong> {{ perfil.carrera|default:"—" }}
+            </li>
+          </ul>
+          <div class="d-flex flex-column flex-sm-row gap-2">
+            <a href="{% url 'editar_perfil' %}" class="btn btn-warning flex-fill">
+              ✏️ Editar perfil
+            </a>
+            <a href="{% url 'logout' %}" class="btn btn-outline-danger flex-fill">
+              🚪 Cerrar sesión
+            </a>
+          </div>
+        </div>
+      </div> <!-- /.row -->
+
+    </div> <!-- /.card-body -->
+  </div> <!-- /.card -->
+</div> <!-- /.container -->
+{% endblock %}
